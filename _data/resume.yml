@@ -55,11 +55,35 @@ volunteer:
     highlights:
       - "Awarded 'Teacher of the Month'"
 education:
-  - institution: "University of Oklahoma"
-    area: "Information Technology"
-    studyType: "Bachelor"
-    startDate: "2011-06-01"
-    endDate: "2014-01-01"
+  - institution: "University of Liverpool"
+    area: "Computer Science"
+    studyType: "PhD"
+    startDate: "2021-10-01"
+    accomplishments:
+    - Distinguished expertise in *deep learning methodologies*, including *convolutional neural networks*, *multi-layer perceptrons*, and *transformers*.
+    - Contributed to the development of a sim-to-xray image mapping network.
+    - Actively participated in mentoring and supervising master's students during their thesis work.
+    - Conducted workshops on **AI and Deep Learning** as part of the outreach group.
+    - Presented work at the esteemed **Hamlyn Symposium** within the *Recent Advances in Autonomous Surgery* workshop.
+    # endDate: "2014-01-01"
+    gpa: "4.0"
+    # courses:
+    #   - "DB1101 - Basic SQL"
+    #   - "CS2011 - Java Introduction"
+  - institution: "University of Liverpool"
+    area: "Computer Science"
+    studyType: "Masters of Science"
+    startDate: "2020-09-01"
+    endDate: "2021-09-01"
+    gpa: "4.0"
+    courses:
+      - "DB1101 - Basic SQL"
+      - "CS2011 - Java Introduction"
+  - institution: "Coventry University"
+    area: "Business Administration"
+    studyType: "Bachelours of Arts"
+    startDate: "2017-09-01"
+    endDate: "2021-08-01"
     gpa: "4.0"
     courses:
       - "DB1101 - Basic SQL"

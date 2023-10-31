@@ -1,10 +1,10 @@
 ---
 layout: welcome
-title: Hi there!
+title: Hello, world!
 sitemap: false
 ---
 
-Hello, my name is Tudor and I am a PhD student at the University of Liverpool.
+I am a Ph.D. student in Artificial Intelligence, working predominantly with deep learning and reinforcement learning to enhance the autonomy within endovascular navigation.
 
 <!-- ## Selected Posts -->
 
