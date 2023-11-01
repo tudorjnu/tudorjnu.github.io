@@ -4,8 +4,6 @@ title: Hello, world!
 sitemap: false
 selected_projects:
   - _projects/cathsim.md
-selected_posts:
-  - example/2023-06-22-fdisk.md
 ---
 
 I am a Ph.D. student in Artificial Intelligence, working predominantly with deep learning and reinforcement learning to enhance the autonomy within endovascular navigation.
@@ -14,7 +12,7 @@ I am a Ph.D. student in Artificial Intelligence, working predominantly with deep
 <!--projects-->
 
 ## Selected Posts
-<!--posts-->
+<!--posts_list-->
 
 
 <!-- ## First Steps -->

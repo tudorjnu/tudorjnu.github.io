@@ -27,9 +27,11 @@ basics:
     #   username: "RHendricksCEO"
     #   url: ""
     - network: "LinkedIn"
-      username: "Tudor Jianu"
+      username: "tudorjnu"
       url: "https://www.linkedin.com/in/tudorjnu/"
-
+    - network: "Github"
+      username: "tudorjnu"
+      url: "https://github.com/tudorjnu/"
 work:
   - company: "University of Liverpool"
     position: "PhD Researcher"
@@ -142,28 +144,59 @@ publications:
     website: "https://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)"
     summary: "Innovative middle-out compression algorithm that changes the way we store data."
 skills:
-  - name: "Web Development"
-    level: "Master"
+  - name: "Technical Skills"
     keywords:
+      - "Machine Learning"
+      - "Algorithms"
+      - "Data Mining"
+      - "Data Visualization"
+      - "Artificial Intelligence"
+      - "Database Systems"
+  - name: "Soft Skills"
+    keywords:
+      - "Planning"
+      - "Problem-Soving"
+      - "Collaboration"
+      - "Communication"
+      - "Active Learning"
+      - "Innovation"
+      - "Mentoring"
+      - "Leadership"
+      - "Responsibility"
+  - name: "Programming Languages"
+    keywords:
+      - "Python"
+      - "Ruby"
+      - "SML"
+      - "Bash"
       - "HTML"
       - "CSS"
-      - "Javascript"
-  - name: "Compression"
-    level: "Master"
+      - "SQL"
+      - "JavaScript"
+  - name: "Tools"
     keywords:
-      - "Mpeg"
-      - "MP4"
-      - "GIF"
-languages:
-  - language: "English"
-    fluency: "Native speaker"
-interests:
-  - name: "Wildlife"
-    keywords:
-      - "Ferrets"
-      - "Unicorns"
-references:
-  - name: "Erlich Bachman"
-    reference: >
-      It is my pleasure to recommend Richard, his performance working as a consultant for Main St.
-      Company proved that he will be a valuable addition to any company.
+      - "VIM"
+      - "Docker"
+      - "Linux"
+      - "Git"
+      - "Jupyter Notebooks"
+
+  # - name: "Web Development"
+  #   level: "Master"
+  #   keywords:
+  #     - "HTML"
+  #     - "CSS"
+  #     - "Javascript"
+# languages:
+#   - language: "English"
+#     fluency: "Native speaker"
+# interests:
+#   - name: "Wildlife"
+#     keywords:
+#       - "Ferrets"
+#       - "Unicorns"
+# references:
+#   - name: "Erlich Bachman"
+#     reference: >
+#       It is my pleasure to recommend Richard, his performance working as a consultant for Main St.
+#       Company proved that he will be a valuable addition to any company.
