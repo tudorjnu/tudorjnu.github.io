@@ -9,15 +9,13 @@ basics:
   # phone: "(912) 555-4321"
   website: "https://tudorjnu.github.io"
   summary: >
-    Richard hails from Tulsa.
-    He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinals!)
-    Before starting Pied Piper, he worked for Hooli as a part time software developer.
-    While his work focuses on applied information theory,
-    mostly optimizing lossless compression schema of both the length-limited and adaptive variants,
-    his non-work interests range widely,
-    everything from quantum computing to chaos theory.
-    He could tell you about it, but THAT would NOT be a “length-limited” conversation!
-    Open `_data/resume.yml` to edit this text.
+    Tudor Jianu completed an MSc in Data Science and Artificial Intelligence 
+    at the University of Liverpool and is currently working towards a PhD in 
+    Artificial Intelligence focused on medical robotics. Specializes in research
+    areas that include autonomous navigation in endovascular procedures. 
+    Beyond the academic sphere, shows a strong inclination for creating clean 
+    software solutions. Thrives in fast-paced, innovative environments committed 
+    to pushing the boundaries of medical technology.
   location:
     # address: "2712 Broadway St"
     # postalCode: "CA 94115"
@@ -31,29 +29,73 @@ basics:
     - network: "LinkedIn"
       username: "Tudor Jianu"
       url: "https://www.linkedin.com/in/tudorjnu/"
+
 work:
   - company: "University of Liverpool"
     position: "PhD Researcher"
-    website: "https://piedpiper.com"
-    startDate: "2013-12-01"
+    # website: "https://piedpiper.com"
+    startDate: "2021-10-01"
     endDate: ""
     summary: >
-      Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has
-      consistently fielded high Weisman Scores™ that are not merely competitive,
-      but approach the theoretical limit of lossless compression.
+      Pursuing a Ph.D. in autonomous endovascular navigation, Tudor excels in 
+      integrating deep learning, software development, and data science. 
+      Engineered an endovascular simulator using Python and MuJoCo, 
+      demonstrating expertise in areas like reinforcement learning and neural networks. 
+      Notable for problem-solving and team collaboration skills, which extend to 
+      mentoring and conducting AI workshops.
     highlights:
-      - "Built an algorithm for artist to detect if their music was violating copy right infringement laws"
-      - "Successfully won Techcrunch Disrupt"
-      - "Optimized an algorithm that holds the current world record for Weisman Scores"
+    - Developed an endovascular simulator, CathSim, using Python
+    - Deployed scripts on HPC's (Barkla)
+    - Researched and applied state-of-the-art neural network architectures
+    - Created an autonomous agent capable of performing endovascular navigation tasks
+    - Presented at the Hamlyn Symposium of Medical Robotics
+    - Supervised and guided trainee researchers, providing essential technical advice to foster academic development
+    - Developed demonstrations for SmartLab using industrial manipulators (UR5) and instance segmentation networks (Mask-RCNN)
+  - company: "University of Liverpool CS Outreach"
+    position: "Team Member"
+    website: "https://outreach.csc.liv.ac.uk"
+    startDate: "2021-10-01"
+    endDate: ""
+    summary: >
+      The Department of Computer Science at the University of Liverpool actively 
+      engages in educational outreach programs to promote computer science. 
+      In collaboration with the Electrical Engineering and Electronics department, 
+      a range of events and resources are offered to schools and the general public.
+    highlights:
+    - Delivered an Introduction to Programming Workshop at Liverpool World Museum using Pi2Go robots
+    - Participated in continuous improvement by generating suggestions, engaging in problem-solving activities to support teamwork.
+    - Generated ideas while working in a small team to produce activities for a series of fun and engaging events to market the university
+    - Developed an Introduction to Machine Learning activity as part of Computer Science Summer School activities.
+    - Created Machine Learning activities by modifying TypeScript and HTML code
+    - Created various educational activities for the Computer Science Department
+
 volunteer:
-  - organization: "CoderDojo"
-    position: "Teacher"
-    website: "https://coderdojo.com/"
-    startDate: "2012-01-01"
-    endDate: "2013-01-01"
-    summary: "Global movement of free coding clubs for young people."
+  # - organization: "CoderDojo"
+  #   position: "Teacher"
+  #   website: "https://coderdojo.com/"
+  #   startDate: "2012-01-01"
+  #   endDate: "2013-01-01"
+  #   summary: "Global movement of free coding clubs for young people."
+  #   highlights:
+  #     - "Awarded 'Teacher of the Month'"
+  - organization: "University of Liverpool"
+    position: "President of Data Science and Artificial Intelligence (DSAI) Society"
+    startDate: "2020-09-01"
+    endDate: "2021-09-01"
+    summary: "Established the society"
     highlights:
-      - "Awarded 'Teacher of the Month'"
+    - "Organized Data Science networking and training events;"
+    - "Set aims and objectives in order to improve the society while securing the commitment of others;"
+    - "Built the committee for the society, advertised roles and advocated conflicts"
+  - organization: "University of Liverpool"
+    position: "Course Representative"
+    startDate: "2020-09-01"
+    endDate: "2021-09-01"
+    summary: "Representative of Data Science and Artificial Intelligence MSc students"
+    highlights:
+    - "Gathered information from the students by asking open questions to better understand the views in order to improve the course"
+    - "Participated in meetings throughout the year, supported the opinions of the students and raised and complains to the department as well as offered tentative solutions to the issues."
+
 education:
   - institution: "University of Liverpool"
     area: "Computer Science"
