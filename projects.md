@@ -1,6 +1,7 @@
 ---
 layout: projects
 title: Projects
+hide_description: true
 show_collection: projects
 description: >
   How people are using Hydejack in the real world. 
