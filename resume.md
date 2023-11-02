@@ -9,8 +9,8 @@ left_column:
   - work
   - volunteer
   - education
-  - awards
   - publications
+  - awards
   - references
 right_column:
   - languages
