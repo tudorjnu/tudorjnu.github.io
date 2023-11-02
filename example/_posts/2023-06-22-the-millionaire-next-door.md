@@ -1,22 +1,15 @@
 ---
+layout: post
 author: tudorjnu
 title: >
    The Millionaire Next Door
-
-# date: 2023-06-08 15:17:00 +0100
+image:
+  path: /assets/img/blog/frugal.png
 categories: [Personal, Book]
 tags: [book, review, finance, frugality, negotiation, wealth accumulation, expected net worth]
-
-
-toc: false
-comments: false
-math: false
-mermaid: false
 ---
 
-
 **Key Takeaways**:
-
 * Frugal Frugal Frugal
 * Live bellow your means
 * Negotiate the hell out of everything

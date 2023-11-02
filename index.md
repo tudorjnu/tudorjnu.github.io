@@ -1,5 +1,6 @@
 ---
 layout: welcome
+cover: true
 title: Hello, world!
 sitemap: false
 selected_projects:

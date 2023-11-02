@@ -2,21 +2,19 @@
 layout: post
 title: >
    How to Code
+image:
+  path: /assets/img/blog/htc.png
 
-# date: 2023-06-08 15:17:00 +0100
 categories: [OSSU, Core Programming]
 tags: [OSSU, BSL, HtC, course review, programming, data-driven , test-driven development, TDD, recursion]
-
-toc: false
-comments: false
-math: false
-mermaid: false
 ---
 
 The gist:
 * An exploration of functional programming with 'How to Code: Simple Data'
 * Gaining command over data structures, types and the test-driven approach
 * The importance of data definition, templates, and readable codes
+
+---
 
 **"How to Code: Simple Data"** serves as a competent introduction to **functional programming** and **coding at large**. This course harnesses the novice-friendly language of **Dr.Racket** to guide learners into the realm of **data-driven programming**. Initially, it **highlights the role of data structures and types** in designing **well-structured functions**.
 
