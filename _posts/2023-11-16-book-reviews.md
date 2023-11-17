@@ -14,6 +14,37 @@ image:
 * toc
 {:toc}
 
+## [The Happiness Hypothesis: Putting Ancient Wisdom to the Test of Modern Science](https://www.goodreads.com/book/show/96884.The_Happiness_Hypothesis?from_search=true&from_srp=true&qid=cvprcF3nGy&rank=1) | Jonathan Haidt
+> Love and work are to people what water and sunshine are to plants.
+
+1. We're all hypocrites, we all believe that what we think is the right reality (Naive Realism)
+2. H (happiness)= S(set points)+C (external conditions)+V (voluntary activities)
+
+## [Ultra-Processed People](https://www.goodreads.com/book/show/62586003-ultra-processed-people?ref=nav_sb_noss_l_10) | Chris van Tulleken
+> It’s not food. It’s an industrially produced edible substance.
+
+1. The *"food"* is engineered to be overeaten
+2. Flavorings trick your brain into thinking that the associated vitamins and minerals are coming. Plot twist, they don't, and now you're overeating.
+2. **Avoid it at all cost**!
+
+
+## [The Digital Minimalist](https://www.goodreads.com/book/show/40672036-digital-minimalism) | Carl Newport
+> The tycoons of social media have to stop pretending that they’re friendly nerd gods building a better world and admit they’re just tobacco farmers in T-shirts selling an addictive product to children. Because, let’s face it, checking your “likes” is the new smoking.
+
+> Simply put, humans are not wired to be constantly wired.
+
+1. Connection fades compared with real communication due to the difference in information processing.
+2. Reclaim quality leisure (DIY, social groups, or rather, physical activities)
+3. Social media is incentivized to glue you to the screen, and they have all the resources to do so. Do you think you have a chance? Better quit!
+
+## [So Good They Can’t Ignore You](https://www.goodreads.com/book/show/13525945-so-good-they-can-t-ignore-you?ref=nav_sb_noss_l_16#?ref=nav_brws) | Carl Newport
+
+> Passion comes after you put in the hard work to become excellent at something valuable, not before. In other words, what you do for a living is much less important than how you do it.
+
+1. Working right trumps the right work
+2. Practice deliberate practice
+3. Think about what you can offer rather than what the world has to offer you
+
 ## [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work) | Carl Newport
 
 > If you can’t learn, you can’t thrive.
