@@ -10,11 +10,12 @@ selected_projects:
 I am a Ph.D. student in Artificial Intelligence, working predominantly with deep learning and reinforcement learning to enhance the autonomy within endovascular navigation.
 
 ## Selected Projects
+
 <!--projects-->
 
 ## Selected Posts
-<!--posts_list-->
 
+<!--posts_list-->
 
 <!-- ## First Steps -->
 <!-- Start by reading the [Documentation]{:.heading.flip-title}. -->
