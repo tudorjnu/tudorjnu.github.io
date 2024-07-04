@@ -32,6 +32,7 @@ basics:
     - network: "Github"
       username: "tudorjnu"
       url: "https://github.com/tudorjnu/"
+
 work:
   - company: "University of Liverpool"
     position: "PhD Researcher"
@@ -46,13 +47,13 @@ work:
       Notable for problem-solving and team collaboration skills, which extend to 
       mentoring and conducting AI workshops.
     highlights:
-    - Developed an endovascular simulator, CathSim, using Python
-    - Deployed scripts on HPC's (Barkla)
-    - Researched and applied state-of-the-art neural network architectures
-    - Created an autonomous agent capable of performing endovascular navigation tasks
-    - Presented at the Hamlyn Symposium of Medical Robotics
-    - Supervised and guided trainee researchers, providing essential technical advice to foster academic development
-    - Developed demonstrations for SmartLab using industrial manipulators (UR5) and instance segmentation networks (Mask-RCNN)
+      - Developed an endovascular simulator, CathSim, using Python
+      - Deployed scripts on HPC's (Barkla)
+      - Researched and applied state-of-the-art neural network architectures
+      - Created an autonomous agent capable of performing endovascular navigation tasks
+      - Presented at the Hamlyn Symposium of Medical Robotics
+      - Supervised and guided trainee researchers, providing essential technical advice to foster academic development
+      - Developed demonstrations for SmartLab using industrial manipulators (UR5) and instance segmentation networks (Mask-RCNN)
   - company: "University of Liverpool CS Outreach"
     position: "Team Member"
     website: "https://outreach.csc.liv.ac.uk"
@@ -64,12 +65,12 @@ work:
       In collaboration with the Electrical Engineering and Electronics department, 
       a range of events and resources are offered to schools and the general public.
     highlights:
-    - Delivered an Introduction to Programming Workshop at Liverpool World Museum using Pi2Go robots
-    - Participated in continuous improvement by generating suggestions, engaging in problem-solving activities to support teamwork.
-    - Generated ideas while working in a small team to produce activities for a series of fun and engaging events to market the university
-    - Developed an Introduction to Machine Learning activity as part of Computer Science Summer School activities.
-    - Created Machine Learning activities by modifying TypeScript and HTML code
-    - Created various educational activities for the Computer Science Department
+      - Delivered an Introduction to Programming Workshop at Liverpool World Museum using Pi2Go robots
+      - Participated in continuous improvement by generating suggestions, engaging in problem-solving activities to support teamwork.
+      - Generated ideas while working in a small team to produce activities for a series of fun and engaging events to market the university
+      - Developed an Introduction to Machine Learning activity as part of Computer Science Summer School activities.
+      - Created Machine Learning activities by modifying TypeScript and HTML code
+      - Created various educational activities for the Computer Science Department
 
 volunteer:
   # - organization: "CoderDojo"
@@ -86,17 +87,17 @@ volunteer:
     endDate: "2021-09-01"
     summary: "Established the society"
     highlights:
-    - "Organized Data Science networking and training events;"
-    - "Set aims and objectives in order to improve the society while securing the commitment of others;"
-    - "Built the committee for the society, advertised roles and advocated conflicts"
+      - "Organized Data Science networking and training events;"
+      - "Set aims and objectives in order to improve the society while securing the commitment of others;"
+      - "Built the committee for the society, advertised roles and advocated conflicts"
   - organization: "University of Liverpool"
     position: "Course Representative"
     startDate: "2020-09-01"
     endDate: "2021-09-01"
     summary: "Representative of Data Science and Artificial Intelligence MSc students"
     highlights:
-    - "Gathered information from the students by asking open questions to better understand the views in order to improve the course"
-    - "Participated in meetings throughout the year, supported the opinions of the students and raised and complains to the department as well as offered tentative solutions to the issues."
+      - "Gathered information from the students by asking open questions to better understand the views in order to improve the course"
+      - "Participated in meetings throughout the year, supported the opinions of the students and raised and complains to the department as well as offered tentative solutions to the issues."
 
 education:
   - institution: "University of Liverpool"
@@ -104,11 +105,11 @@ education:
     studyType: "PhD"
     startDate: "2021-10-01"
     accomplishments:
-    - "Distinguished expertise in *deep learning methodologies*, including *convolutional neural networks*, *multi-layer perceptrons*, and *transformers*."
-    - "Contributed to the development of a sim-to-xray image mapping network."
-    - "Actively participated in mentoring and supervising master's students during their thesis work."
-    - "Conducted workshops on **AI and Deep Learning** as part of the outreach group."
-    - "Presented work at the esteemed **Hamlyn Symposium** within the *Recent Advances in Autonomous Surgery* workshop."
+      - "Distinguished expertise in *deep learning methodologies*, including *convolutional neural networks*, *multi-layer perceptrons*, and *transformers*."
+      - "Contributed to the development of a sim-to-xray image mapping network."
+      - "Actively participated in mentoring and supervising master's students during their thesis work."
+      - "Conducted workshops on **AI and Deep Learning** as part of the outreach group."
+      - "Presented work at the esteemed **Hamlyn Symposium** within the *Recent Advances in Autonomous Surgery* workshop."
 
   - institution: "University of Liverpool"
     area: "Computer Science"
