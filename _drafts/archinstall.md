@@ -1,7 +1,6 @@
----
-layout: post
-title: Arch Install
----
+______________________________________________________________________
+
+## layout: post title: Arch Install
 
 This guide serves as a way for me to document my install and as such, provide other
 people with a structured way to install Arch Linux so that we can say the phrase
@@ -32,6 +31,8 @@ Use [lsblk](https://wiki.archlinux.org/title/Device_file#lsblk) to find the syst
 As a general guidance, swap has to be the same amount of RAM in order to allow the PC to hybernate. My system has 64GB of RAM, however, I am most of the time using a quarter of it, and sometimes reaching half of it. So I will set my swap to be 32GB.
 
 For the root partition an encryption will be used together with a BTRFS filesystem and I will use subvolumes for root, home.
+
+More information can be found on [archwiki](https://wiki.archlinux.org/title/partitioning)
 
 ## 2 Formatting
 
