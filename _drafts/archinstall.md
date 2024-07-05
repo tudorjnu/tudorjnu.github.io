@@ -1,12 +1,38 @@
-______________________________________________________________________
+# ArchInstall | A personal guide
 
-## layout: post title: Arch Install
+<!-- markdownlint-disable-file MD013 -->
 
-This guide serves as a way for me to document my install and as such, provide other
-people with a structured way to install Arch Linux so that we can say the phrase
-**BTW, I use Arch**.
+<!--toc:start-->
 
-Head-up, this, the following guide goes through the manual install. I believe that the automatic install is easy enough to not need a guide in the first place. Also, the guide will follow closely the arch installation guide from [https://wiki.archlinux.org/title/installation_guide](https://wiki.archlinux.org/title/installation_guide). Lastly, I am assuming that access to the internet is in place and the system is succesfully booted from the USB stick. If not, please have a look at [Connect_to_the_internet](https://wiki.archlinux.org/title/installation_guide#Connect_to_the_internet).
+- [ArchInstall | A personal guide](#archinstall-a-personal-guide)
+  - [layout: post title: Arch Install](#layout-post-title-arch-install)
+  - \[Set console Keyboard | [archwiki](Set_the_console_keyboard_layout_and_font)\](#set-console-keyboard-archwikisettheconsolekeyboardlayoutandfont)
+  - \[[Check boot mode](https://wiki.archlinux.org/title/installation_guide#Verify_the_boot_mode)\](#check-boot-modehttpswikiarchlinuxorgtitleinstallationguideverifythebootmode)
+  - [Disk Partitioning](#disk-partitioning)
+  - [2 Formatting](#2-formatting)
+    - [2.1. Format the EFI partition and SWAP](#21-format-the-efi-partition-and-swap)
+    - [2.2. Format the root partition](#22-format-the-root-partition)
+  - [BTRFS](#btrfs)
+    - [Mounting](#mounting)
+  - [Installation](#installation)
+    - [Install essential packages (yes, vim is essential)](#install-essential-packages-yes-vim-is-essential)
+    - [Generate fstab](#generate-fstab)
+    - [Essential Config](#essential-config)
+    - [Install rest of packages](#install-rest-of-packages)
+    - [Edit `mkinitpio`](#edit-mkinitpio)
+  - [Setup GRUB](#setup-grub)
+    - \[Swap Encryption ([link](https://wiki.archlinux.org/title/dm-crypt/Swap_encryption#With_suspend-to-disk_support))\](#swap-encryption-linkhttpswikiarchlinuxorgtitledm-cryptswapencryptionwithsuspend-to-disksupport)
+    - [Enable services](#enable-services)
+  - \[Setup Snapper ([link](https://wiki.archlinux.org/title/Snapper))\](#setup-snapper-linkhttpswikiarchlinuxorgtitlesnapper)
+  - [Troubleshoot](#troubleshoot)
+
+<!--toc:end-->
+
+## Pre-installation
+
+This guide serves as a way for me to document my installation and as such, provide other people with a structured way to install Arch Linux so that we can say the phrase **BTW, I use Arch**.
+
+Head-up, this, the following guide goes through the manual installation. I believe that the automatic installation is easy enough to not need a guide in the first place. Also, the guide will follow closely the arch installation guide from [https://wiki.archlinux.org/title/installation_guide](https://wiki.archlinux.org/title/installation_guide). Lastly, I am assuming that access to the internet is in place, and the system is succesfully booted from the USB stick. If not, please have a look at [Connect_to_the_internet](https://wiki.archlinux.org/title/installation_guide#Connect_to_the_internet).
 
 ## Set console Keyboard | [archwiki](Set_the_console_keyboard_layout_and_font)
 
@@ -28,9 +54,9 @@ Use [lsblk](https://wiki.archlinux.org/title/Device_file#lsblk) to find the syst
 | \[SWAP\]    | /dev/swap_partition       | Linux Swap (19)          | RAM size (TLDR)     |
 | /mnt        | /dev/root_partition       | Linux                    | Remainder of device |
 
-As a general guidance, swap has to be the same amount of RAM in order to allow the PC to hybernate. My system has 64GB of RAM, however, I am most of the time using a quarter of it, and sometimes reaching half of it. So I will set my swap to be 32GB.
+As a general guidance, swap has to be the same amount of RAM to allow the PC to hibernate. My system has 64GB of RAM, however, I am most of the time using a quarter of it, and sometimes reaching half of it. So I will set my swap to be 32GB.
 
-For the root partition an encryption will be used together with a BTRFS filesystem and I will use subvolumes for root, home.
+For the root partition an encryption will be used together with a BTRFS filesystem, and I will use subvolumes for root, home.
 
 More information can be found on [archwiki](https://wiki.archlinux.org/title/partitioning)
 
@@ -59,7 +85,8 @@ cryptsetup luksFormat /dev/root_partition
 ```
 
 2. Open the partition
-   The partition requires a name. I call it `cryptroot` but you can call it however you want.
+
+The partition requires a name. I call it `cryptroot` but you can call it however you want.
 
 ```sh
 cryptsetup luksOpen /dev/root_partition cryptroot
