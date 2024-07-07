@@ -1,10 +1,12 @@
-# ArchInstall | A personal guide
+# [ArchInstall](archinstall.md) | A personal guide
 
 <!-- markdownlint-disable-file MD013 -->
 
 ## Pre-installation
 
 This guide serves as a way for me to document my installation, so I can make it repeatable. In this way, it also serves as a structured way to install Arch Linux for other people so that we can all say the phrase **BTW, I use Arch**. Head-up, the following guide goes through the manual installation. I believe that the automatic installation is easy enough to not need a guide in the first place. Also, the guide will follow closely the arch installation guide from [https://wiki.archlinux.org/title/installation_guide](https://wiki.archlinux.org/title/installation_guide). Lastly, I am assuming that access to the internet is in place, and the system is succesfully booted from the USB stick. If not, please have a look at [Connect_to_the_internet](https://wiki.archlinux.org/title/installation_guide#Connect_to_the_internet). For any issues you are encountering, check the friendly manual RTFM 󰱸.
+
+Changed my mind. I will use luks -> lvm -> btrfs / swap ([link](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS))
 
 I would be using a few key features:
 
@@ -23,17 +25,34 @@ localectl list-keymaps
 loadkeys <chosen key>
 ```
 
-### Check boot mode ([link](https://wiki.archlinux.org/title/installation_guide#Verify_the_boot_mode))
-
-If you get an output for the following, you should be good to go:
+Check boot mode
+([link](https://wiki.archlinux.org/title/installation_guide#Verify_the_boot_mode)). If you get an output for the following, you should be good to go:
 
 ```sh
 cat /sys/firmware/efi/fw_platform_size
 ```
 
-### Disk Partitioning
+Check for network connectivity:
 
-Use [lsblk](https://wiki.archlinux.org/title/Device_file#lsblk) to find the system layout in its current state. In a virtual machine, the partition is `vda`. Once that is done, [fdisk](https://wiki.archlinux.org/title/fdisk), is going to be used for formatting the disk. I am going to build a system with a standard partition table:
+```sh
+ping archlinux.org
+```
+
+Start the sshd
+
+```sh
+systemctl start sshd
+```
+
+Set a password:
+
+```sh
+passwd
+```
+
+### Disk partitioning 2.0
+
+In order to make things simple and secured, I will create an [LVM on LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) setup. The idea is that a full partition would be encrypted and then it can be altered as wished. Another benefit of this setup is that it allows for [suspend-to-disk](https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#With_suspend-to-disk_support) of the swap partition. This means that the device can be put to [hibernate](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation) and all the information will be saved onto the encrypted [swap](https://wiki.archlinux.org/title/swap) partition.
 
 | Mount point | Partition                 | Partitio Type            | Size                |
 | ----------- | ------------------------- | ------------------------ | ------------------- |
@@ -41,52 +60,79 @@ Use [lsblk](https://wiki.archlinux.org/title/Device_file#lsblk) to find the syst
 | \[SWAP\]    | /dev/swap_partition       | Linux Swap (19)          | RAM size (TLDR)     |
 | /mnt        | /dev/root_partition       | Linux                    | Remainder of device |
 
-As a general guidance, swap has to be the same amount of RAM to allow the PC to hibernate. My system has 64GB of RAM, however, I am most of the time using a quarter of it, and sometimes reaching half of it. So I will set my swap to be 32GB.
+#### Create `boot` and `LUKS` partitions
 
-For the root partition an encryption will be used together with a *BTRFS* filesystem, and I will use subvolumes for root, home.
+In order to find the device we want to partition use `lsblk`. This will list all
+block devices. In my virtual machine, my block device is called `vda`.
 
-More information can be found on [archwiki](https://wiki.archlinux.org/title/partitioning)
+Create the following partitions using `fdisk`:
 
-#### Disk Formatting
+* A boot partition (size 1G)
+* A LUKS partition with the rest of the memory
 
-##### 2.1. Format the EFI partition and SWAP
+For more information look [here]([archwiki](https://wiki.archlinux.org/title/partitioning)).
 
-```sh
-# format EFI partition
-mkfs.fat -F 32 /dev/efi_system_partition
+> [!NOTE]
+> You won't find a LUKS partition type, leave it to `Linux`
 
-# format SWAP
-mkswap /dev/swap_partition
-
-# activate SWAP
-swapon /dev/swap_partition
-```
-
-##### 2.2. Format the root partition
-
-As mentioned, I am going to use BTRFS with encryption. Encryption has to come
-before formatting the partition, so it has to be done now. For this, I will be using [cryptsetup](https://wiki.archlinux.org/title/Dm-crypt/Device_encryption).
-
-First, the partition has to be encrypted:
+With the two partitions created, we can now format them:
 
 ```sh
-# encrypt the partition
-cryptsetup luksFormat /dev/root_partition
+mkfs.fat -F 32 /dev/<efi_system_partition>
 ```
 
-Then it has to be opened. The partition requires a name. I call it `cryptroot`, but you can call it however you want.
+For example with `mkfs.fat -F 32 /dev/vda1`.
+
+Next step is to encrypt the second partition:
 
 ```sh
-cryptsetup luksOpen /dev/root_partition cryptroot
+cryptsetup luksFormat /dev/<partition>
 ```
 
-Now we can format the partition with `btrfs`:
+Now we need to open it and map it to a name. Mine will be called **cryptlvm**
+but feel free to call it **mysuperamazingpartition** if you want. But be aware
+of the typing.
 
 ```sh
-mkfs.btrfs /dev/mapper/cryptroot
+cryptsetup open /dev/<partition> cryptlvm
+````
+
+#### Creating the [LVM](https://wiki.archlinux.org/title/LVM) volumes
+
+Create a physical volume on top of the opened LUKS container:
+
+```sh
+pvcreate /dev/mapper/cryptlvm
 ```
 
-### BTRFS
+Create a volume group (_i.e._ `vg`):
+
+```sh
+vgcreate vg /dev/mapper/cryptlvm
+```
+
+Create all logical volumes on the volume group. As mentioned before, the two
+logical volumes I need are `root` and `swap`:
+
+```sh
+lvcreate -L 4G vg -n swap
+lvcreate -l 100%FREE vg -n root
+```
+
+Format the logical volumes:
+
+```sh
+mkswap /dev/vg/swap
+mkfs.btrfs /dev/vg/root
+```
+
+Enable swap:
+
+```sh
+swapon /dev/vg/swap
+```
+
+#### Make the `btrfs` subvolumes
 
 I am going for the following subvolume layout, inspired by [this](https://github.com/classy-giraffe/easy-arch?tab=readme-ov-file) and [this](https://wiki.archlinux.org/title/Snapper#Suggested_filesystem_layout). I am planning to use [snapper](https://wiki.archlinux.org/title/Snapper) as my snapshot manager. A tip recommended by the wiki is to make a subvolume for things that you do not want to be includded in the snapshots.
 
@@ -97,44 +143,43 @@ I am going for the following subvolume layout, inspired by [this](https://github
 | 3                | @snapshots     | /.snapshots           |
 | 4                | @var_log       | /var/log              |
 
-To create subvolumes on the *btrfs* filesystem, we first need to mount the root partition
-
-#### Mount the openned partition and cd into it
+In order to make the `btrfs` subvolumes, the partition has to be mounted:
 
 ```sh
-mount /dev/mapper/cryptroot /mnt
+mount /dev/vg/root /mnt
 cd /mnt
 ```
 
-#### Create subvolumes
+Now the subvolumes can be created as following:
 
 ```sh
 btrfs subvolume create @
 btrfs subvolume create @home
 btrfs subvolume create @var_log
 btrfs subvolume create @var_pkgs
+btrfs subvolume create @snapshots
 ```
 
-#### Umount
+Now we can mount the subvolumes. First `cd` out of the root:
 
 ```sh
 cd
 umount /mnt
 ```
 
-### Mounting the partitions
+We can now mount the subvolumes
 
 ```sh
+mount -o subvol=@ /dev/vg/root /mnt
+
 # create mnounting points
-mkdir /mnt/
-mkdir -p /mnt/{boot,home,.snapshots}
+mkdir -p /mnt/{boot,home,.snapshots,var/log,var/cache/pacman/pkg}
 
 # mount the partitions
-mount -o noatime,subvol=@ /dev/mapper/cryptroot /mnt
-mount -o noatime,subvol=@home /dev/mapper/cryptroot /mnt/home
-mount -o noatime,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
-mount -o noatime,subvol=@var_log /dev/mapper/cryptroot /mnt/var/log
-mount -o noatime,subvol=@var_pkgs /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+mount -o subvol=@home /dev/vg/root /mnt/home
+mount -o subvol=@snapshots /dev/vg/root /mnt/.snapshots
+mount -o subvol=@var_log /dev/vg/root /mnt/var/log
+mount -o subvol=@var_pkgs /dev/vg/root /mnt/var/cache/pacman/pkg
 
 mount /dev/vda1 /mnt/boot
 ```
@@ -165,22 +210,34 @@ arch-chroot /mnt
 # set root password
 passwd
 
-# make user
-useradd -m -g users -G wheel tj
-passwd tj
+# add yourself to sudoers file /etc/sudoers
+echo "tj ALL=(ALL) ALL" >> /etc/sudoers.d/tj
 
 # set the time
 ln -sf /usr/share/zoneinfo/<Region>/<City> /etc/localtime
 hwclock --systohc
 
-# uncomment the required locale in /etc/locale.gen
-# add the same locale in /etc/locale.conf LANG=en_GB.UTF-8
-# set locale
-locale-gen
 
 # create the hostname file /etc/hostname
 <yourhostname>
 
+```
+
+##### Set up the locale
+
+Uncomment the required locale in `/etc/locale.gen` such as:
+
+* en_GB.UTF-8
+* en_US.UTF-8
+
+Add the same locale in `/etc/locale.conf`
+
+```sh
+LANG=en_US.UTF-8
+```
+
+```sh
+locale-gen
 ```
 
 ### Install rest of packages
@@ -195,8 +252,8 @@ TODO: add Wi-Fi
 # - wifi: iw
 # - NVIDIA drivers: nvidia, nvidia-utils, nvidia-settings
 # - Various utilities and fonts: sh-completion, openssh, reflector, flatpak, terminus-font
-pacman -S grub grub-btrfs efibootmgr dosfstools\
-          networkmanager network-manager-applet \
+pacman -S grub grub-btrfs efibootmgr dosfstools mtools \
+          networkmanager network-manager-applet os-prober sudo\
           bluez bluez-utils \
           cups \
           iw \
@@ -205,7 +262,15 @@ pacman -S grub grub-btrfs efibootmgr dosfstools\
           bash-completion openssh reflector flatpak terminus-font snapper
 ```
 
-### Edit `mkinitpio`
+Create your user
+
+```sh
+# make user
+useradd -m -g users -G wheel tj
+passwd tj
+```
+
+### Edit `mkinitpio` at `/etc/mkinitcpio.conf`
 
 This step is required because I am using encryption
 
@@ -251,8 +316,6 @@ Regenerate config:
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-Do a restart 󰒲
-
 ### Enable services
 
 ```sh
@@ -261,6 +324,14 @@ systemctl enable bluetooth
 systemctl enable cups.service
 systemctl enable sshd
 systemctl enable reflector.timer
+```
+
+Do a restart 󰒲:
+
+```sh
+exit
+umount -a
+reboot
 ```
 
 At this point, we have a clean installation. From here, you have a clean slate to
@@ -313,9 +384,28 @@ Example can be:
 kernel /vmlinuz-linux cryptdevice=/dev/sda2:rootDevice root=/dev/mapper/rootDevice resume=/dev/mapper/swapDevice ro
 ```
 
-#### mkinitcpio hook
+#### mkinitcpio hook (necessary for resuming from encrypted device)
 
 ## Setup Snapper ([link](https://wiki.archlinux.org/title/Snapper))
+
+## Setup Window Manager
+
+First, we need to get the rewquired packages. Yours might differ but here are my
+choices:
+
+* Browser: Firefox
+* Terminal: Alacritty
+* File Manager: lf
+* Compositor: picom
+* Wallppaper: nitrogen
+* Display Manager: ly
+* Extras:
+  * Customization: lxappearance
+
+```sh
+sudo pacman -S qtile lxappearance nitrogen alacritty lf ly
+
+```
 
 ## Troubleshoot
 
