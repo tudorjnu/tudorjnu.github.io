@@ -12,6 +12,7 @@ description: |
 > [!WARNING]
 > This is still under construction. Do not follow!
 
+
 My Linux journey started around October 2021. I've dual booted PopOS and ended
 up using Linux for most of the time. At that point, I ended up just erasing
 everything and install PopOS as my stand alone Operating System. Few months
