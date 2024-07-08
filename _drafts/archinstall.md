@@ -138,7 +138,7 @@ passwd
 
 [Partitioning Scheme](assets/img/blog/archlinux-install/partitioning.png)
 
-To make things simple and secured, I will create an [LVM on LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) setup. The idea is that a full partition would be encrypted, and then it can be altered as wished. Another benefit of this setup is that it allows for [suspend-to-disk](https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#With_suspend-to-disk_support) of the swap partition. This means that the device can be put to [hibernate](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation) and all the information will be saved onto the encrypted [swap](https://wiki.archlinux.org/title/swap) partition. The overall partitioning can be viewed above, where the summary of invormation can be viewed bellow:
+To make things simple and secured, I will create an [LVM on LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS) setup. The idea is that a full partition would be encrypted, and then it can be altered as wished. Another benefit of this setup is that it allows for [suspend-to-disk](https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption#With_suspend-to-disk_support) of the swap partition. This means that the device can be put to [hibernate](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation) and all the information will be saved onto the encrypted [swap](https://wiki.archlinux.org/title/swap) partition. The overall partitioning can be viewed above, where the summary of information can be viewed bellow:
 
 <table border="1">
   <tr>
@@ -222,6 +222,7 @@ To make things simple and secured, I will create an [LVM on LUKS](https://wiki.a
     <td>/var/cache/pacman/pkg</td>
   </tr>
 </table>
+
 #### Create `boot` and `LUKS` partitions
 
 To find the device we want to partition use `lsblk`. This will list all
@@ -293,7 +294,7 @@ swapon /dev/vg0/lvmswap
 
 #### Make the [BTRFS](https://wiki.archlinux.org/title/btrfs) subvolumes
 
-I am going for the following subvolumes layout, inspired by [this](https://github.com/classy-giraffe/easy-arch?tab=readme-ov-file) and [this](https://wiki.archlinux.org/title/Snapper#Suggested_filesystem_layout). I am planning to use [snapper](https://wiki.archlinux.org/title/Snapper) as my snapshot manager. A tip recommended by the wiki is to make a subvolume for things that you do not want to be includded in the snapshots.
+I am going for the following subvolumes layout, inspired by [this](https://github.com/classy-giraffe/easy-arch?tab=readme-ov-file) and [this](https://wiki.archlinux.org/title/Snapper#Suggested_filesystem_layout). I am planning to use [snapper](https://wiki.archlinux.org/title/Snapper) as my snapshot manager. A tip recommended by the wiki is to make a subvolume for things that you do not want to be included in the snapshots.
 
 | Subvolume Number | Subvolume Name | Mountpoint            |
 | ---------------- | -------------- | --------------------- |
@@ -365,13 +366,13 @@ the [wiki](https://wiki.archlinux.org/title/installation_guide). The main things
 we need are:
 
 * CPU [microcode](https://wiki.archlinux.org/title/Microcode) updates: `amd-ucode` or `intel-ucode`;
-* [utilities for filesystems](https://wiki.archlinux.org/title/File_systems):
+* [Utilities for filesystem](https://wiki.archlinux.org/title/File_systems):
 `btrfs-progs`;
 * LVM management: `lvm2`;
-* firmware not included in `linux-firmware` (none on my end);
-* [networking](https://wiki.archlinux.org/title/Network_configuration) software: `networkmanager`, `networkmanager-applet`, and `iwd`;
-* [console text editor](https://wiki.archlinux.org/title/List_of_applications/Documents#Console): `neovim` (for me, for you might be `nano`);
-* documentation accessing software: `man-db`, `man-pages`,`texinfo`,and `tldr`;
+* Firmware not included in `linux-firmware` (none on my end);
+* [Networking](https://wiki.archlinux.org/title/Network_configuration) software: `networkmanager`, `networkmanager-applet`, and `iwd`;
+* [Console text editor](https://wiki.archlinux.org/title/List_of_applications/Documents#Console): `neovim` (for me, for you might be `nano`);
+* Documentation accessing software: `man-db`, `man-pages`,`texinfo`,and `tldr`;
 
 ```sh
 pacstrap -K /mnt base base-devel \
@@ -465,7 +466,7 @@ useradd -m -g users -G wheel tj
 passwd tj
 ```
 
-Add yourself to sudoers file `/etc/sudoers`:
+Add yourself to "sudoers" file `/etc/sudoers`:
 
 ```sh
 echo "tj ALL=(ALL) ALL" >> /etc/sudoers.d/tj
