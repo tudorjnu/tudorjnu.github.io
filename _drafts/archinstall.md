@@ -20,17 +20,17 @@ I would be using a few key features:
 * [Snapper](https://wiki.archlinux.org/title/snapper) for snapshots
 * [LVM on LUKS](https://wiki.archlinux.org/title/dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS)
 
-This should be secure enough while keeping things "simple".
+This should be secure enough while keeping things _"simple"_.
 
 ### Basics
 
-If you have a HiDPI screen:
+If you have a [HiDPI](https://wiki.archlinux.org/title/HiDPI#Linux_console_(tty)) screen:
 
 ```sh
 setfont ter-132b
 ```
 
-Change the keyboard layout if you need to (the default is us)
+Change the keyboard layout if you need to (the default is us):
 
 ```sh
 localectl list-keymaps
@@ -74,7 +74,6 @@ To make things simple and secured, I will create an [LVM on LUKS](https://wiki.a
 | Mount point | Partition                 | Partitio Type            | Size                |
 | ----------- | ------------------------- | ------------------------ | ------------------- |
 | /mnt/boot   | /dev/efi_system_partition | EFI system partition (1) | 1G                  |
-| \[SWAP\]    | /dev/swap_partition       | Linux Swap (19)          | RAM size (TLDR)     |
 | /mnt        | /dev/root_partition       | Linux                    | Remainder of device |
 
 #### Create `boot` and `LUKS` partitions
