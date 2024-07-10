@@ -234,6 +234,13 @@ Create the following partitions using `fdisk`:
 
 For more information have a look at the [archwiki](https://wiki.archlinux.org/title/partitioning).
 
+We also want to wipe the data from the drive. Use:
+
+```sh
+wipefs -a <target device>
+
+```
+
 With the two partitions created, we can now format them:
 
 ```sh
@@ -336,7 +343,6 @@ mount -o subvol=@ /dev/vg0/lvmroot /mnt
 Create the directories:
 
 ```sh
-
 mkdir -p /mnt/{boot,home,.snapshots,var/log,var/cache/pacman/pkg}
 ```
 
@@ -370,11 +376,15 @@ we need are:
 * LVM management: `lvm2`;
 * Firmware not included in `linux-firmware` (none on my end);
 
+> [!WARNING]
+> The `microcode` is not included in the following command. Include it yourself!
+
 ```sh
 pacstrap -K /mnt \
   base base-devel \
   linux linux-headers linux-firmware \
   linux-lts linux-lts-headers \
+  intel-ucode \
   btrfs-progs \
   lvm2 \
   neovim git \
@@ -447,6 +457,9 @@ Now there are a few packages left. Feel free to adapt this to your case:
 * [Networking](https://wiki.archlinux.org/title/Network_configuration) software: `networkmanager`, `networkmanager-applet`, and `iwd`;
 * [Console text editor](https://wiki.archlinux.org/title/List_of_applications/Documents#Console): `neovim` (for me, for you might be `nano`);
 * Documentation accessing software: `man-db`, `man-pages`,`texinfo`,and `tldr`;
+* Bluetooth: `bluez`, `bluez-utils`;
+* Sound System: `pipewire`;
+* Printing: `cups`;
 
 ```sh
 sudo pacman -S \
@@ -461,6 +474,8 @@ sudo pacman -S \
   man-db \
   man-pages \
   texinfo tldr \
+  cups \
+  bluez bluez-utils \
 ```
 
 Create your user
@@ -486,10 +501,20 @@ I added encrypt before filesystem in hooks and `btrfs` in modules, see [here](ht
 Two changes are necessary here. Firstly, the `btrfs` module has to be loaded.
 Next, I changed the `HOOKS` to `systemd` stuff as following:
 
-<!-- TODO: replace this -->
 ```md
 MODULES=(btrfs)
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block *encrypt* lvm2 filesystems fsck)
+```
+
+Add `lvm2` and `encrypt` to hooks:
+
+```sh
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block **encrypt** **lvm2** filesystems fsck)
+```
+
+Alternatively add the following hooks for systemd based setup:
+
+```sh
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt lvm2 filesystems fsck)
 ```
 
 Regenerate the images (needs to be done for every kernel):
@@ -603,6 +628,15 @@ And give the folder 750 permissions:
 chmod 750 /.snapshots
 ```
 
+### Setting up [paru](https://github.com/morganamilo/paru)
+
+```sh
+sudo pacman -S --needed base-devel
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
+
 ## General Setup
 
 ### The desktop environment route
@@ -619,43 +653,13 @@ After a restart you should be greeted by [GDM](https://wiki.archlinux.org/title/
 
 ### The window manager route
 
-<!-- TODO: fill up this section -->
-
 If you are like me, however, and like to have a window manager, we got a bit
-more work to do. First, we need to get the required packages. Yours might differ but here are my
-choices:
-
-* Compositor: `picom`
-* Display Manager: `ly`
-* Window Manager: `qtile`
-* Wallpaper: `nitrogen`
-* Bluetooth: `bluez`, `bluez-utils`;
-* Sound System: `pipewire`;
-* Printing: `cups`;
-* Snapshots Manager: `snapper`;
-* Software:
-  * Browser: `firefox`
-  * Terminal: `alacritty`
-  * File Manager: `lf`
-* Fonts: `terminus-font`, `ttf-ubuntu-nerd`, `ttf-ubuntu-mono-nerd`, `ttf-jetbrains-mono-nerd`;
-* Display server: `xorg`, `xorg-xwayland`
+more work to do. I will just use a `gist` from [here]() to do this
+automatically. You can use this as a template for yours.
 
 ```sh
-sudo pacman -S picom ly qtile nitrogen
-sudo pacman -S \
-  picom \
-  ly \
-  qtile \
-  bluez bluez-utils \
-  pipewire \
-  cups \
-  snapper \
-  firefox \
-  alacritty \
-  lf \
-  xorg xorg-xwayland \
-  terminus-font ttf-ubuntu-nerd ttf-ubuntu-mono-nerd ttf-jetbrains-mono-nerd
+git clone https://gist.github.com/9216148ea2713e9121889b0f5c7aacbe.git archinstall
+bash ./archinstall/archinstall.sh
 ```
 
-That should do it for now. You should now have a fully functional system
-
+That should do it for now. You should now have a fully functional system.
