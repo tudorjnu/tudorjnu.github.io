@@ -180,7 +180,7 @@ To make things simple and secured, I will create an [LVM on LUKS](https://wiki.a
     <td rowspan="6" style="text-align: center; vertical-align: middle">Yes</td>
     <td rowspan="6" style="text-align: center; vertical-align: middle">vg0</td>
     <td>lvmswap</td>
-    <td>4G</td>
+    <td>RAM size + 8-12G</td>
     <td>swap</td>
     <td>N/A</td>
     <td>N/A</td>
@@ -426,15 +426,14 @@ Create the hostname file `/etc/hostname`:
 
 Uncomment the required locale in `/etc/locale.gen` such as:
 
-* en_GB.UTF-8
-* en_US.UTF-8
+```sh
+en_GB.UTF-8
+```
 
-Add the main locale in `/etc/locale.conf` and since we are there, add a
-fallback:
+Add the main locale in `/etc/locale.conf`:
 
 ```sh
 LANG=en_GB.UTF-8
-LANGUAGE=en_US.UTF-8
 ```
 
 Generate the locale:
@@ -480,15 +479,14 @@ sudo pacman -S \
 Create your user
 
 ```sh
-# make user
-useradd -m -g users -G wheel tudorjnu
-passwd tudorjnu
+useradd -m -g users -G wheel <username>
+passwd <username>
 ```
 
 Add yourself to "sudoers" file `/etc/sudoers`:
 
 ```sh
-echo "tudorjnu ALL=(ALL) ALL" >> /etc/sudoers.d/tudorjnu
+echo "<username> ALL=(ALL) ALL" >> /etc/sudoers.d/<username>
 ```
 
 ### Edit `mkinitpio` at `/etc/mkinitcpio.conf`
@@ -497,24 +495,27 @@ This step is required because I am using encryption
 
 I added encrypt before filesystem in hooks and `btrfs` in modules, see [here](https://wiki.archlinux.org/title/Dm-crypt/System_configuration#Unlocking_in_early_userspace) and [here](https://wiki.archlinux.org/title/Mkinitcpio#Common_hooks).
 
-Two changes are necessary here. Firstly, the `btrfs` module has to be loaded.
-Next, I changed the `HOOKS` to `systemd` stuff as following:
+Two changes are necessary here. Firstly, the `btrfs` module has to be loaded:
 
 ```md
 MODULES=(btrfs)
 ```
 
-Add `lvm2` and `encrypt` to hooks:
+Next, you have two options. One is to use the default `busybox` then add `lvm2`
+and `encrypt` to hooks:
 
 ```sh
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block **encrypt** **lvm2** filesystems fsck)
 ```
 
-Alternatively add the following hooks for systemd based setup:
+Alternatively add the following hooks for `systemd` based setup:
 
 ```sh
 HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt lvm2 filesystems fsck)
 ```
+
+It is a matter of preference on which one you chose. `systemd` is a bit more
+versatile.
 
 Regenerate the images (needs to be done for every kernel):
 
