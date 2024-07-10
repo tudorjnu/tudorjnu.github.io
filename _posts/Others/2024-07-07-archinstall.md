@@ -238,7 +238,6 @@ We also want to wipe the data from the drive. Use:
 
 ```sh
 wipefs -a <target device>
-
 ```
 
 With the two partitions created, we can now format them:
