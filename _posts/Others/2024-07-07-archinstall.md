@@ -89,7 +89,7 @@ setfont ter-132b
 Change the keyboard layout if you need to (the default is us):
 
 ```sh
-localectl list-keymaps
+[localectl](localectl.md) list-keymaps
 loadkeys <chosen key> # loadkeys uk for example
 ```
 
@@ -383,7 +383,6 @@ pacstrap -K /mnt \
   base base-devel \
   linux linux-headers linux-firmware \
   linux-lts linux-lts-headers \
-  intel-ucode \
   btrfs-progs \
   lvm2 \
   neovim git \
@@ -650,16 +649,5 @@ sudo systemctl enable gdm
 ```
 
 After a restart you should be greeted by [GDM](https://wiki.archlinux.org/title/GDM).
-
-### The window manager route
-
-If you are like me, however, and like to have a window manager, we got a bit
-more work to do. I will just use a `gist` from [here]() to do this
-automatically. You can use this as a template for yours.
-
-```sh
-git clone https://gist.github.com/9216148ea2713e9121889b0f5c7aacbe.git archinstall
-bash ./archinstall/archinstall.sh
-```
 
 That should do it for now. You should now have a fully functional system.
