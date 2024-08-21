@@ -3,7 +3,7 @@
 # See also: <https://jsonresume.org/>.
 basics:
   name: "Tudor Jianu"
-  label: "PhD Student | Aspiring Software Developer"
+  label: "PhD Student | Researcher of Artificial Intelligence in Medical Robotics"
   # picture: "https://via.placeholder.com/240x240"
   email: "tudorjnu@gmail.com"
   # phone: "(912) 555-4321"
@@ -17,15 +17,10 @@ basics:
     software solutions. Thrives in fast-paced, innovative environments committed 
     to pushing the boundaries of medical technology.
   location:
-    # address: "2712 Broadway St"
-    # postalCode: "CA 94115"
     city: "Liverpool"
     countryCode: "UK"
-    # region: "California"
+    region: "Merseyside"
   profiles:
-    # - network: "Twitter"
-    #   username: "RHendricksCEO"
-    #   url: ""
     - network: "LinkedIn"
       username: "tudorjnu"
       url: "https://www.linkedin.com/in/tudorjnu/"
